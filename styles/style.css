@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#cardContainer {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    object-position: top;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.2);
+    box-shadow: 24px 20px 23px -10px rgba(163, 126, 126, 0.75);
+}
+
+#modalContainer{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(35, 37, 37, 0.463);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal{
+    width: 45%;
+    height: 45%;
+    background-color: white;
+    border-radius: 15px;
+}
+
+#closeModal{
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
