@@ -1,6 +1,8 @@
 //-------- 1. Lógica de programación
 //---algoritmos (pseudocódigo o diagrama de flujos)
 
+import { getCharacters } from "../services/characterServices.js";
+
 
 //-------2. Estructuras condicionales y cíclicas
 
@@ -149,6 +151,8 @@ const personajesLosSimpson = [
     }
 ];
 
+let personajes = [];
+
 const cardContainer = document.getElementById('cardContainer');
 const closeModal = document.getElementById('closeModal');
 const modalContainer = document.getElementById('modalContainer');
@@ -165,17 +169,20 @@ const printCards = (array, container) => {
     container.innerHTML = "";
     array.forEach(element => {
         const card = document.createElement("img");
-        card.setAttribute("src", element.imagen);
-        card.setAttribute("alt", element.nombre);
-        card.setAttribute("id-personaje", element.id);
+        card.setAttribute("src", element.Imagen);
+        card.setAttribute("alt", element.Nombre);
+        card.setAttribute("id-personaje", element._id);
         card.classList.add("card");
         container.appendChild(card);
     })
 }
 
 
+// const personajes = await getCharacters();
+// console.log(personajes);
 
-printCards(personajesLosSimpson, cardContainer);
+
+// printCards(personajesLosSimpson, cardContainer);
 
 
 
@@ -183,20 +190,26 @@ printCards(personajesLosSimpson, cardContainer);
 
 //Queremos escuchar el click de cada card
 
+document.addEventListener("DOMContentLoaded", async () => {
+    personajes = await getCharacters();
+    
+    printCards(personajes, cardContainer);
+})
+
 cardContainer.addEventListener("click", (event) => {
     if (event.target.classList.contains('card')) {
         const idPersonaje = event.target.getAttribute("id-personaje");
         console.log(idPersonaje);
-        const personaje = personajesLosSimpson.find((persona) => persona.id == idPersonaje);
+        const personaje = personajes.find((persona) => persona._id == idPersonaje);
         console.log(personaje);
         modalContainer.style.display = 'flex';
         modal.innerHTML = `
             <article>
-                <h1>${personaje.nombre}</h1>
-                <img src=${personaje.imagen} alt=${personaje.nombre}>
+                <h1>${personaje.Nombre}</h1>
+                <img src=${personaje.Imagen} alt=${personaje.Nombre}>
                 <div>
                     <h3>Historia</h3>
-                    <p>${personaje.historia}</p>
+                    <p>${personaje.Historia}</p>
                 </div>
             </article>
         `;
